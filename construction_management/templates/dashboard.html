@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Construction Management System{% endblock %}
+
+{% block content %}
+<div class="py-6">
+    <h2 class="text-2xl font-semibold text-gray-900">Dashboard</h2>
+    
+    <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Active Projects Card -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-project-diagram text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Active Projects</dt>
+                            <dd class="flex items-baseline">
+                                <div class="text-2xl font-semibold text-gray-900">{{ active_projects_count }}</div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <a href="{% url 'transactions' %}" class="font-medium text-blue-600 hover:text-blue-900">View all transactions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Labourers Card -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-users text-2xl text-green-600"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Active Labourers</dt>
+                            <dd class="flex items-baseline">
+                                <div class="text-2xl font-semibold text-gray-900">{{ active_labourers_count }}</div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <a href="{% url 'labour' %}" class="font-medium text-green-600 hover:text-green-900">View all labour</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Transactions Card -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-money-bill-wave text-2xl text-yellow-600"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Total Transactions</dt>
+                            <dd class="flex items-baseline">
+                                <div class="text-2xl font-semibold text-gray-900">₹{{ total_transactions|floatformat:2 }}</div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <a href="{% url 'transactions' %}" class="font-medium text-yellow-600 hover:text-yellow-900">View transactions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Vendors Card -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-store text-2xl text-purple-600"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Active Vendors</dt>
+                            <dd class="flex items-baseline">
+                                <div class="text-2xl font-semibold text-gray-900">{{ vendors_count }}</div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <a href="{% url 'vendors' %}" class="font-medium text-purple-600 hover:text-purple-900">View all vendors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-8">
+        <h3 class="text-lg font-medium text-gray-900">Quick Actions</h3>
+        <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <a href="{% url 'vendors' %}" class="card-hover relative block p-6 bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h4 class="text-base font-semibold text-gray-900">Manage Vendors</h4>
+                <p class="mt-1 text-sm text-gray-600">Add, edit, or view vendor information</p>
+            </a>
+            
+            <a href="{% url 'labour' %}" class="card-hover relative block p-6 bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h4 class="text-base font-semibold text-gray-900">Manage Labour</h4>
+                <p class="mt-1 text-sm text-gray-600">Handle labour assignments and payments</p>
+            </a>
+            
+            <a href="{% url 'transactions' %}" class="card-hover relative block p-6 bg-white border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h4 class="text-base font-semibold text-gray-900">View Transactions</h4>
+                <p class="mt-1 text-sm text-gray-600">Track financial transactions and payments</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Reports Section -->
+    <div class="mt-8">
+        <h3 class="text-lg font-medium text-gray-900">Reports</h3>
+        <div class="mt-4">
+            <a href="{% url 'reports' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-chart-bar mr-2"></i>
+                Generate Reports
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
