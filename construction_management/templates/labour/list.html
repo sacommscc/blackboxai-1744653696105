@@ -6,7 +6,7 @@
 <div class="py-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-900">Labour Management</h1>
-        <a href="{% url 'labour_add' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+        <a href="{% url 'labour:labour_add' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
             <i class="fas fa-plus mr-2"></i> Add Labourer
         </a>
     </div>
@@ -77,13 +77,13 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{% url 'labour_edit' labourer.id %}" class="text-blue-600 hover:text-blue-900 mr-3">
+                            <a href="{% url 'labour:labour_edit' labourer.id %}" class="text-blue-600 hover:text-blue-900 mr-3">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="{% url 'labour_worklog' labourer.id %}" class="text-green-600 hover:text-green-900 mr-3">
+                            <a href="{% url 'labour:worklog_list' %}" class="text-green-600 hover:text-green-900 mr-3">
                                 <i class="fas fa-clock"></i>
                             </a>
-                            <a href="{% url 'labour_delete' labourer.id %}" class="text-red-600 hover:text-red-900" 
+                            <a href="{% url 'labour:labour_delete' labourer.id %}" class="text-red-600 hover:text-red-900" 
                                onclick="return confirm('Are you sure you want to delete this labourer?')">
                                 <i class="fas fa-trash"></i>
                             </a>
