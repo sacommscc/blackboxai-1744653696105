@@ -24,11 +24,6 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
 
-        # Get or create admin role
-        from users.models import Role
-        admin_role = Role.objects.get(name='admin')
-        extra_fields['role'] = admin_role
-
         return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
@@ -46,6 +41,8 @@ class CustomUser(AbstractUser):
     role = models.ForeignKey(
         'Role',
         on_delete=models.PROTECT,
+        null=True,  # Allow null temporarily
+        blank=True,
         related_name='users'
     )
 
