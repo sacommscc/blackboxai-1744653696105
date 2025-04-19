@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'labour.apps.LabourConfig',
     'transactions.apps.TransactionsConfig',
     'reports.apps.ReportsConfig',
+    'contractors.apps.ContractorsConfig',
 ]
 
 MIDDLEWARE = [
