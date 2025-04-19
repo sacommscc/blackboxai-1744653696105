@@ -6,9 +6,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
-    path('labour/', include('labour.urls', namespace='labour')),
-    path('transactions/', include('transactions.urls', namespace='transactions')),
-    path('reports/', include('reports.urls', namespace='reports')),
+    # API endpoints
+    path('api/labour/', include('labour.urls', namespace='labour')),
+    path('api/transactions/', include('transactions.urls', namespace='transactions')),
+    path('api/reports/', include('reports.urls', namespace='reports')),
+    path('api/vendors/', include('vendors.urls')),  # Added vendors API routes
+    path('reports/', include('reports.urls', namespace='reports')),  # Include reports URLs at both paths
     path('', include('users.urls', namespace='users')),
 ]
 
