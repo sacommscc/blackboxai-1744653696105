@@ -1,7 +1,8 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.views.decorators.http import require_POST
 import logging
 import json
 
@@ -47,3 +48,21 @@ def login_view(request):
             messages.error(request, 'Invalid email or password')
     
     return render(request, 'registration/login.html')
+
+from django.http import HttpResponseNotAllowed
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+
+@csrf_exempt
+@require_http_methods(["POST", "GET"])
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('/login/?logged_out=1')
+    elif request.method == "GET":
+        # Redirect GET logout requests to login with message
+        return redirect('/login/?message=Please use the logout button to log out properly.')
+    else:
+        return HttpResponseNotAllowed(['POST', 'GET'])
