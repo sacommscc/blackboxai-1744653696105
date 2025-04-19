@@ -47,7 +47,7 @@
                         <a href="{% url 'transactions' %}" class="nav-link {% if request.resolver_match.url_name == 'transactions' %}nav-link-active{% endif %}">
                             <i class="fas fa-money-bill-wave mr-2"></i> Transactions
                         </a>
-                        <a href="{% url 'reports' %}" class="nav-link {% if request.resolver_match.url_name == 'reports' %}nav-link-active{% endif %}">
+                        <a href="{% url 'reports:report_list' %}" class="nav-link {% if request.resolver_match.url_name == 'report_list' %}nav-link-active{% endif %}">
                             <i class="fas fa-chart-bar mr-2"></i> Reports
                         </a>
                     </div>
@@ -85,7 +85,7 @@
                 <a href="{% url 'transactions' %}" class="nav-link block {% if request.resolver_match.url_name == 'transactions' %}nav-link-active{% endif %}">
                     <i class="fas fa-money-bill-wave mr-2"></i> Transactions
                 </a>
-                <a href="{% url 'reports' %}" class="nav-link block {% if request.resolver_match.url_name == 'reports' %}nav-link-active{% endif %}">
+                <a href="{% url 'reports:report_list' %}" class="nav-link block {% if request.resolver_match.url_name == 'report_list' %}nav-link-active{% endif %}">
                     <i class="fas fa-chart-bar mr-2"></i> Reports
                 </a>
             </div>
