@@ -45,6 +45,18 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   localStorage.removeItem('token');
+  // Call backend logout endpoint with POST to clear session
+  try {
+    await fetch('http://localhost:8000/logout/', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
   return null;
 });
 
