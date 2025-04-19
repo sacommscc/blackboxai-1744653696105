@@ -10,7 +10,6 @@ urlpatterns = [
     path('vendors/<int:id>/delete/', views.vendors_list, name='vendor_delete'),
     path('labour/', views.labour_list, name='labour'),
     path('transactions/', views.transactions_list, name='transactions'),
-    path('reports/', views.reports_list, name='reports'),
     
     # Authentication URLs
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
