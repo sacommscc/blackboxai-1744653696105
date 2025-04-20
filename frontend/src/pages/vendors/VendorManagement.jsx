@@ -9,7 +9,7 @@ import {
 import { PlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import VendorForm from './VendorForm';
 
-const VendorManagement = () => {
+const VendorManagement = ({ openAddForm }) => {
   const dispatch = useDispatch();
   const vendors = useSelector(selectVendors);
   const isLoading = useSelector(selectIsLoading);
@@ -20,6 +20,12 @@ const VendorManagement = () => {
   useEffect(() => {
     dispatch(fetchVendors());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (openAddForm) {
+      setIsFormOpen(true);
+    }
+  }, [openAddForm]);
 
   const handleEdit = (vendor) => {
     setSelectedVendor(vendor);
