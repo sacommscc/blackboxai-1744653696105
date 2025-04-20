@@ -29,6 +29,8 @@ def transaction_add(request):
             date = request.POST.get('date')
             description = request.POST.get('description')
             payment_method = request.POST.get('payment_method')
+            transaction_id = request.POST.get('transaction_id')
+            project_id = request.POST.get('project')
             
             # Validate amount
             try:
@@ -47,7 +49,15 @@ def transaction_add(request):
                 raise ValueError("Invalid payment method")
             
             logger.info(f"Creating transaction with: type={transaction_type}, amount={amount}, "
-                       f"date={date}, payment_method={payment_method}")
+                       f"date={date}, payment_method={payment_method}, transaction_id={transaction_id}, project_id={project_id}")
+            
+            project = None
+            if project_id:
+                from construction_management.projects.models import Project
+                try:
+                    project = Project.objects.get(pk=project_id)
+                except Project.DoesNotExist:
+                    raise ValueError("Invalid project selected")
             
             transaction = FinancialTransaction.objects.create(
                 transaction_type=transaction_type,
@@ -55,6 +65,8 @@ def transaction_add(request):
                 date=date,
                 description=description,
                 payment_method=payment_method,
+                transaction_id=transaction_id,
+                project=project,
                 reference_number=reference_number
             )
             messages.success(request, 'Transaction added successfully.')
@@ -89,6 +101,8 @@ def transaction_edit(request, pk):
             date = request.POST.get('date')
             description = request.POST.get('description')
             payment_method = request.POST.get('payment_method')
+            transaction_id = request.POST.get('transaction_id')
+            project_id = request.POST.get('project')
             
             # Validate amount
             try:
@@ -106,11 +120,21 @@ def transaction_edit(request, pk):
             if payment_method not in dict(FinancialTransaction.PAYMENT_METHOD_CHOICES):
                 raise ValueError("Invalid payment method")
             
+            project = None
+            if project_id:
+                from construction_management.projects.models import Project
+                try:
+                    project = Project.objects.get(pk=project_id)
+                except Project.DoesNotExist:
+                    raise ValueError("Invalid project selected")
+            
             transaction.transaction_type = transaction_type
             transaction.amount = amount
             transaction.date = date
             transaction.description = description
             transaction.payment_method = payment_method
+            transaction.transaction_id = transaction_id
+            transaction.project = project
             transaction.save()
             
             messages.success(request, 'Transaction updated successfully.')
