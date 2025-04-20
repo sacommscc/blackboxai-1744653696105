@@ -18,6 +18,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/vendors/*" element={<VendorManagement />} />
+          <Route path="/vendors/add" element={<VendorManagement openAddForm />} />
           <Route path="/labour/*" element={<LabourManagement />} />
           <Route path="/transactions/*" element={<Transactions />} />
           <Route path="/reports/*" element={<Reports />} />
