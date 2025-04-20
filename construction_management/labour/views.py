@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
 from decimal import Decimal
+from django.http import JsonResponse
 from .models import Labourer, WorkLog, LabourPayment, LabourType, Skill
 
 @login_required
@@ -10,6 +11,12 @@ def labour_list(request):
     """View to list all labourers"""
     labourers = Labourer.objects.all()
     return render(request, 'labour/list.html', {'labourers': labourers})
+
+@login_required
+def labour_types_api(request):
+    """API view to return labour types as JSON"""
+    labour_types = LabourType.objects.all().values('id', 'name', 'description', 'base_daily_wage')
+    return JsonResponse(list(labour_types), safe=False)
 
 @login_required
 def labour_add(request):
