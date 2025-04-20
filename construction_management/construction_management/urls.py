@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/vendors/', include('vendors.urls')),  # Added vendors API routes
     path('reports/', include('reports.urls', namespace='reports')),  # Include reports URLs at both paths
     path('users/', include('users.urls', namespace='users')),
+    path('api/contractors/', include('contractors.urls', namespace='contractors')),
     path('logout/', RedirectView.as_view(url='/users/logout/', permanent=False)),
     path('logout', RedirectView.as_view(url='/users/logout/', permanent=False)),
 ]
